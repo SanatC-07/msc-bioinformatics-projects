@@ -1,34 +1,38 @@
-# 🧬 Predicting Neuroblastoma Clinical Outcomes using RNA-seq Data
+# 🧬 Predicting Neuroblastoma Clinical Outcomes from Gene Expression Data
 
-This project aims to predict key clinical outcomes of neuroblastoma patients using gene expression data (RNA-seq). The goal of this project is to develop a machine learning model that can predict clinical outcomes in neuroblastoma patients using RNA-Seq gene expression data. Several clinical outcome fields contain missing values. This project aims to train models that can accurately predict those outcomes and use them to impute the missing values.
+This project predicts key clinical outcomes in neuroblastoma patients using gene 
+expression data from two platforms: **RNA-Seq (log2 FPKM)** and **Microarray probe 
+intensities**. Four machine learning models were developed, evaluated, and compared 
+across four clinical endpoints to identify the best performing approach for each 
+outcome and platform.
 
-## Project Aims:
+## Project Aims
 
-- **Explore and understand** the dataset to identify patterns, distributions, and any preprocessing needs.
+- **Explore and preprocess** gene expression data from both platforms using Scanpy and AnnData, 
+  including quality control filtering, highly variable gene selection, PCA, Nearest neighbor graph construction and visualisation and 
+  train/test splitting to prevent data leakage.
 
-- **Select clinical endpoints** as target variables for prediction:
-  
-  - **Death from Disease:**  
-    Occurrence of death from the disease  
-    (yes = 1, no = 0)
-  
-  - **High Risk:**  
-    Clinically considered as high-risk neuroblastoma  
-    (yes = 1, no = 0)
-  
-  - **INSS Stage:**  
-    Disease stage according to the International Neuroblastoma Staging System  
-    (1, 2, 3, 4, or 4S)
-  
-  - **Progression:**  
-    Occurrence of a tumor progression event  
-    (yes = 1, no = 0)
+- **Predict four clinical endpoints** using gene expression features:
 
-- **Build classification models** to predict each selected clinical endpoint using RNA-Seq gene expression data.
+  - **Death from Disease** — occurrence of death from disease (yes = 1, no = 0)
+  - **High Risk** — clinically considered high-risk neuroblastoma (yes = 1, no = 0)
+  - **INSS Stage** — disease stage per International Neuroblastoma Staging System (1, 2, 3, 4, 4S)
+  - **Progression** — occurrence of tumour progression event (yes = 1, no = 0)
 
-- **Evaluate model performance** using appropriate metrics such as accuracy, precision, recall, F1-score, and ROC-AUC.
+- **Train and compare four classification models** across both platforms:
+  - Logistic Regression
+  - Random Forest
+  - XGBoost
+  - Neural Network
 
-- **Generate predictions** for the missing clinical outcomes in the test set using the trained models.
+- **Evaluate model performance** using accuracy, precision, recall, F1-score and 
+  ROC-AUC, with SMOTE applied to address class imbalance.
+
+- **Identify the best performing model** per outcome and platform, and interpret 
+  key predictive genes driving model decisions.
+
+- **Generate predictions** for missing clinical outcomes using the best performing 
+  trained models.
 
 ## Project Structure
 ```
@@ -40,6 +44,7 @@ neuroblastoma-gene-expression/
 ├── xgboost.ipynb                     # XGBoost model training and evaluation
 ├── neural_network.ipynb              # Neural network training and evaluation
 ├── plot_results.ipynb                # Cross-model comparison and visualisation
+├── predictive_modelling.ipynb        # Initial practice notebook (not directly part of analysis)
 │
 ├── utils.py                          # Data loading, QC filtering, HVG selection
 │
